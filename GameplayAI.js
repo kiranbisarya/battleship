@@ -1,7 +1,7 @@
 /**
  * @class
  */
-class Gameplay {
+class GameplayAI {
 	/**
 	* @description Manages the boards and user interaction during gameplay (ship placement and attacking)
 	* @param rows {number} The number of rows the boards have
@@ -77,7 +77,7 @@ class Gameplay {
 		this.turn = !this.turn;
 		this.renderBoards(false);
 		clearInterval(this.turnTimer);
-		this.msg("It's " + this.playerName(this.turn) + "'s turn. Attack a space on " + this.playerName(!this.turn) + "'s board.");
+		this.msg("It's " + this.playerName(this.turn) + "'s turn. Attack a space on AI " + this.playerName(!this.turn) + "'s board.");
 	}
 
 	/**
