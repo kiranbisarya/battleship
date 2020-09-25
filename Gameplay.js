@@ -3,7 +3,7 @@
  */
 class Gameplay {
 	/**
-	* @description Manages the boards and user interaction during gameplay (ship placement and attacking) TEST
+	* @description Manages the boards and user interaction during gameplay (ship placement and attacking) TEST2
 	* @param rows {number} The number of rows the boards have
 	* @param cols {number} The number of columns the boards have
 	* @param numShips {number} The number of ships each player has
