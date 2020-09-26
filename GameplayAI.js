@@ -8,7 +8,7 @@ class GameplayAI {
 	* @param cols {number} The number of columns the boards have
 	* @param numShips {number} The number of ships each player has
 	**/
-	constructor(rows, cols, numShip) {
+	constructor(rows, cols, numShip, aiDiff) {
 		/*
 		 * @member turn {boolean} Which player's turn it is - false is board0 (left) and true is board1 (right)
 		 * @member isSetup {boolean} Whether the ship placement phase of gameplay has been completed
@@ -20,6 +20,7 @@ class GameplayAI {
 		this.rows = rows;
 		this.cols = cols;
 		this.numShips = numShip;
+		this.aiDifficulty = aiDiff;
 
 		this.turn = false;
 		this.isSetup = false;
