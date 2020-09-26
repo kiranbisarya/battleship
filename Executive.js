@@ -29,6 +29,7 @@ class Executive {
 
 		// Setting up the event for a click to change the menu for the board
 		document.getElementById("complete").addEventListener("click", e => this.initGame());
+		document.getElementById("startAIGame").addEventListener("click", e => this.initGameAI());
     }
 	
 	/**
@@ -44,6 +45,18 @@ class Executive {
 		document.getElementById("controls").style.display = "";
 		document.getElementById("both_boards").style.display = "";
 		document.getElementById("switch-turn").style.display = "none";
-		this.game = new GameplayAI(this.rows, this.cols, this.numShips); //Change to create new InitGame() function and call GameplayAI there
+		this.game = new Gameplay(this.rows, this.cols, this.numShips);
+	}
+	initGameAI() {
+		for (let i = 0; i <= 1; i++) {
+			let playerName = document.getElementById("player" + i + "-name-input").value;
+			if (playerName == "") playerName = "Player " + (i+1);
+			document.getElementById("player" + i + "-name").value = playerName;
+		}
+		document.getElementById("menu").style.display = "none";
+		document.getElementById("controls").style.display = "";
+		document.getElementById("both_boards").style.display = "";
+		document.getElementById("switch-turn").style.display = "none";
+		this.game = new GameplayAI(this.rows, this.cols, this.numShips, this.aiDifficulty); //Change to create new InitGame() function and call GameplayAI there
 	}
 }
