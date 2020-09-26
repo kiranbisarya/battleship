@@ -164,7 +164,7 @@ class GameplayAI {
 				//this.renderBoards(false);
 			}
 			else if (++this.numShipsPlaced < this.numShips) { // Placed successfully and still more ships to place
-				this.msg(this.playerName(this.turn) + " place your " + (shipLength-1) + " ship");
+				this.msg("Click anywhere on the right board for the AI to randomly place its " + (shipLength-1) + " ship");
 				//this.renderBoards(false);
 			}
 			else { // Last ship placed
