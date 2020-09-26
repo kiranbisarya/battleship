@@ -64,12 +64,17 @@ class GameplayAI {
 			}
 		});
 
-		// document.getElementById("ai-attack").addEventListener("click", e => this.aiAttack());
+		document.getElementById("ai-attack").addEventListener("click", e => this.aiAttack(aiDiff));
 		
 		document.getElementById("switch-now").addEventListener("click", e => this.switchTurns());
 		
 		// Future enhancement: Reset the game properly so player names can be kept
 		document.getElementById("play-again").addEventListener("click", e => window.location.reload());
+	}
+	//will see which mode is being used and attack
+	aiAttack(aiDiff)
+	{
+
 	}
 
 	/**
