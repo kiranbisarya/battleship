@@ -121,6 +121,9 @@ class GameplayAI {
 				if (cell.hasShip) {
 					let board = this.turn ? this.board0 : this.board1;
 					this.msg("Hit!");
+					//adding code below to play sound effect
+					var snd = new Audio("hit.mp3");
+					snd.play();
 					board.shipSpaces--;
 					if (board.checkWin()){
 						this.gameEnd();
