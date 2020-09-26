@@ -120,6 +120,8 @@ class Gameplay {
 				if (cell.hasShip) {
 					let board = this.turn ? this.board0 : this.board1;
 					this.msg("Hit!");
+					var snd = new Audio("hit.mp3");
+					snd.play();
 					board.shipSpaces--;
 					if (board.checkWin()){
 						this.gameEnd();
