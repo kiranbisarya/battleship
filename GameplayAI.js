@@ -63,6 +63,8 @@ class GameplayAI {
 				this.msg(this.playerName(this.turn) + " place your " + this.numShips + " ship");
 			}
 		});
+
+		// document.getElementById("ai-attack").addEventListener("click", e => this.aiAttack());
 		
 		document.getElementById("switch-now").addEventListener("click", e => this.switchTurns());
 		
@@ -78,7 +80,7 @@ class GameplayAI {
 		this.turn = !this.turn;
 		this.renderBoards(false);
 		clearInterval(this.turnTimer);
-		this.msg("It's " + this.playerName(this.turn) + "'s turn. Attack a space on AI " + this.playerName(!this.turn) + "'s board.");
+		this.msg("It's " + this.playerName(this.turn) + "'s turn. Attack a space on " + this.playerName(!this.turn) + "'s board.");
 	}
 
 	/**
@@ -131,11 +133,14 @@ class GameplayAI {
 					else {
 						this.renderBoards(true);
 						document.getElementById("switch-turn").style.display = "";
+						document.getElementById("ai-attack").style.display = "";
 					}
 				}
 				else {
 					this.renderBoards(true);
-					document.getElementById("switch-turn").style.display = "";
+					//since the below line I just commented out, the game will get stuck here until we add ai-attack code to the event listener above
+					//document.getElementById("switch-turn").style.display = "";
+					document.getElementById("ai-attack").style.display = "";
 					this.msg("Miss.")
 				}
 			}
