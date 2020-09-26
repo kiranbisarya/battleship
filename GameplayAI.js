@@ -141,31 +141,60 @@ class GameplayAI {
 		}
 	}
 
+	getRandomInt(max) {
+		return Math.floor(Math.random() * Math.floor(max));
+	}
+
 	/**
 	* @description Places a new ship on the current player's board
 	* @param cell {Space} The space the user clicked on, which will be the top/left end of the new ship
 	**/
 	newShip(cell) {
 		let board = this.turn ? this.board1 : this.board0;
-		let shipLength = this.numShips - this.numShipsPlaced;
-		let placedShip = board.placeShip(shipLength, cell.row, cell.col, this.isVertical);
-		if (placedShip !== true) { // Failed to place ship in a valid location
-			this.msg(placedShip);
-			this.renderBoards(false);
-		}
-		else if (++this.numShipsPlaced < this.numShips) { // Placed successfully and still more ships to place
-			this.msg(this.playerName(this.turn) + " place your " + (shipLength-1) + " ship");
-			this.renderBoards(false);
-		}
-		else { // Last ship placed
-			this.msg("Ship placement complete");
-			this.renderBoards(true);
-			document.getElementById("dir-container").style.display = "none";
-			document.getElementById("switch-turn").style.display = "";
-			if (this.board0.ships.length == this.board1.ships.length) { // Both players have placed their ships
-				this.isSetup = true;
+		if (board == this.board1) { //Computer Board randomly places ships
+			this.msg("Computer turn: " + this.getRandomInt(9));
+			let shipLength = this.numShips - this.numShipsPlaced;
+			let placedShip = board.placeShip(shipLength, this.getRandomInt(9), this.getRandomInt(9), this.isVertical);
+			if (placedShip !== true) { // Failed to place ship in a valid location
+				this.msg(placedShip);
+				//this.renderBoards(false);
+			}
+			else if (++this.numShipsPlaced < this.numShips) { // Placed successfully and still more ships to place
+				this.msg(this.playerName(this.turn) + " place your " + (shipLength-1) + " ship");
+				//this.renderBoards(false);
+			}
+			else { // Last ship placed
+				this.msg("Ship placement complete");
+				//this.renderBoards(true);
+				document.getElementById("dir-container").style.display = "none";
+				document.getElementById("switch-turn").style.display = "";
+				if (this.board0.ships.length == this.board1.ships.length) { // Both players have placed their ships
+					this.isSetup = true;
+				}
 			}
 		}
+		else {
+			let shipLength = this.numShips - this.numShipsPlaced;
+			let placedShip = board.placeShip(shipLength, cell.row, cell.col, this.isVertical);
+			if (placedShip !== true) { // Failed to place ship in a valid location
+				this.msg(placedShip);
+				this.renderBoards(false);
+			}
+			else if (++this.numShipsPlaced < this.numShips) { // Placed successfully and still more ships to place
+				this.msg(this.playerName(this.turn) + " place your " + (shipLength-1) + " ship");
+				this.renderBoards(false);
+			}
+			else { // Last ship placed
+				this.msg("Ship placement complete");
+				this.renderBoards(true);
+				document.getElementById("dir-container").style.display = "none";
+				document.getElementById("switch-turn").style.display = "";
+				if (this.board0.ships.length == this.board1.ships.length) { // Both players have placed their ships
+					this.isSetup = true;
+				}
+			}
+		}
+		
 	}
 
 	/**
