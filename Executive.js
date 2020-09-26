@@ -12,6 +12,7 @@ class Executive {
  		* @member cols {number} The number of columns each board will have
  		*/
 		this.numShips = document.getElementById("ship-slider").value;
+		this.aiDifficulty = document.getElementById("ai-slider").value;
 		// Future enhancement: Allow the user to select the size of the board
 		this.rows = 9;
 		this.cols = 9;
@@ -19,6 +20,11 @@ class Executive {
 		document.getElementById("ship-slider").addEventListener("input", e => {
 			this.numShips = e.target.value
 			document.getElementById("num-ships").innerHTML = this.numShips;
+		});
+
+		document.getElementById("ai-slider").addEventListener("input", e => {
+			this.aiDifficulty = e.target.value
+			document.getElementById("ai-difficulty").innerHTML = this.aiDifficulty;
 		});
 
 		// Setting up the event for a click to change the menu for the board
