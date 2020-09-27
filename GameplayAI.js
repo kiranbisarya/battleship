@@ -63,11 +63,18 @@ class GameplayAI {
 				 this.msg(this.playerName(this.turn) + " place your " + this.numShips + " ship");
 			}
 		});
+
+		document.getElementById("ai-attack").addEventListener("click", e => this.aiAttack(aiDiff));
 		
 		document.getElementById("switch-now").addEventListener("click", e => this.switchTurns());
 		
 		// Future enhancement: Reset the game properly so player names can be kept
 		document.getElementById("play-again").addEventListener("click", e => window.location.reload());
+	}
+	//will see which mode is being used and attack
+	aiAttack(aiDiff)
+	{
+
 	}
 
 	/**
@@ -78,7 +85,7 @@ class GameplayAI {
 		this.turn = !this.turn;
 		this.renderBoards(false);
 		clearInterval(this.turnTimer);
-		this.msg("It's " + this.playerName(this.turn) + "'s turn. Attack a space on AI " + this.playerName(!this.turn) + "'s board.");
+		this.msg("It's " + this.playerName(this.turn) + "'s turn. Attack a space on " + this.playerName(!this.turn) + "'s board.");
 	}
 
 	/**
@@ -121,6 +128,9 @@ class GameplayAI {
 				if (cell.hasShip) {
 					let board = this.turn ? this.board0 : this.board1;
 					this.msg("Hit!");
+					//adding code below to play sound effect
+					var snd = new Audio("hit.mp3");
+					snd.play();
 					board.shipSpaces--;
 					if (board.checkWin()){
 						this.gameEnd();
@@ -128,11 +138,14 @@ class GameplayAI {
 					else {
 						this.renderBoards(true);
 						document.getElementById("switch-turn").style.display = "";
+						document.getElementById("ai-attack").style.display = "";
 					}
 				}
 				else {
 					this.renderBoards(true);
-					document.getElementById("switch-turn").style.display = "";
+					//since the below line I just commented out, the game will get stuck here until we add ai-attack code to the event listener above
+					//document.getElementById("switch-turn").style.display = "";
+					document.getElementById("ai-attack").style.display = "";
 					this.msg("Miss.")
 				}
 			}
@@ -161,7 +174,7 @@ class GameplayAI {
 				//this.renderBoards(false);
 			}
 			else if (++this.numShipsPlaced < this.numShips) { // Placed successfully and still more ships to place
-				this.msg(this.playerName(this.turn) + " place your " + (shipLength-1) + " ship");
+				this.msg("Click anywhere on the right board for the AI to randomly place its " + (shipLength-1) + " ship");
 				//this.renderBoards(false);
 			}
 			else { // Last ship placed
