@@ -64,7 +64,7 @@ class GameplayAI {
 			}
 		});
 
-		document.getElementById("ai-attack").addEventListener("click", e => this.aiAttack(aiDiff));
+		//document.getElementById("ai-attack").addEventListener("click", e => this.aiAttack(aiDiff));
 		
 		document.getElementById("switch-now").addEventListener("click", e => this.switchTurns());
 		
@@ -74,7 +74,15 @@ class GameplayAI {
 	//will see which mode is being used and attack
 	aiAttack(aiDiff)
 	{
+		if(aiDiff == 1) {
 
+		}
+		else if(aiDiff == 2) {
+
+		}
+		else {
+
+		}
 	}
 
 	/**
@@ -138,15 +146,54 @@ class GameplayAI {
 					else {
 						this.renderBoards(true);
 						document.getElementById("switch-turn").style.display = "";
-						document.getElementById("ai-attack").style.display = "";
+						//document.getElementById("ai-attack").style.display = "";
 					}
 				}
 				else {
 					this.renderBoards(true);
 					//since the below line I just commented out, the game will get stuck here until we add ai-attack code to the event listener above
-					//document.getElementById("switch-turn").style.display = "";
-					document.getElementById("ai-attack").style.display = "";
+					document.getElementById("switch-turn").style.display = "";
+					//document.getElementById("ai-attack").style.display = "";
 					this.msg("Miss.")
+				}
+			}
+		}
+		else if (isCurrentPlayer) { // During setup phase, you click your own board
+			this.newShip(cell);
+		}
+	}
+
+	clickSpaceAI(cell, isCurrentPlayer) {
+		if (this.isSetup) {	
+			cell.row = Math.floor(Math.random() * Math.floor(9));
+			cell.col = Math.floor(Math.random() * Math.floor(9));
+			
+			if (!isCurrentPlayer && !cell.isHit) {
+				
+				cell.isHit = true;
+				if (cell.hasShip) {
+					let board = this.turn ? this.board0 : this.board1;
+					this.msg("Hit! " + "CELL ROW: " + cell.row + "CELL COL: " + cell.col);
+					
+					//adding code below to play sound effect
+					var snd = new Audio("hit.mp3");
+					snd.play();
+					board.shipSpaces--;
+					if (board.checkWin()){
+						this.gameEnd();
+					} 
+					else {
+						this.renderBoards(true);
+						document.getElementById("switch-turn").style.display = "";
+						//document.getElementById("ai-attack").style.display = "";
+					}
+				}
+				else {
+					this.renderBoards(true);
+					//since the below line I just commented out, the game will get stuck here until we add ai-attack code to the event listener above
+					document.getElementById("switch-turn").style.display = "";
+					//document.getElementById("ai-attack").style.display = "";
+					this.msg("Miss." + " CELL ROW: " + cell.row + "CELL COL: " + cell.col)
 				}
 			}
 		}
