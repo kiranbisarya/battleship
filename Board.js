@@ -67,9 +67,58 @@ class Board {
 				if (cell.isHit && !cell.hasShip) td.classList.add("miss");
 				if (cell.isHit && cell.hasShip) td.classList.add("hit");
 				if (!preventClicking) {
-					// Each cell has its own event listenser that listens for clicks on itself
+					// Each cell has its own event listener that listens for clicks on itself
 					td.addEventListener('click', e => game.clickSpace(cell, isCurrentPlayer));
 				}
+				tr.appendChild(td);
+			}
+			table.appendChild(tr);
+		}
+	}
+
+
+	/**
+	* @description Render the current state of the board to an HTML table element, optionally showing ships and allowing clicking
+	* @param {HTMLTableElement} table The table to render the board to
+	* @param {Gameplay} game to use the clickSpace method of
+	* @param {boolean} isCurrentPlayer for whether all ship locations should be visible
+	* @param {boolean} preventClicking to restrict a player to click again
+	**/
+	renderAI(table, game, isCurrentPlayer) {
+		table.innerHTML = ""; // Remove any existing cells
+
+		// Add letter row
+		let letter = 'A';
+		let tr = document.createElement("tr");
+		let th = document.createElement("th");
+		tr.appendChild(th);
+		for (let cell of this.cells[0]) {
+			let th = document.createElement("th");
+			th.innerText = letter;
+			tr.appendChild(th);
+			letter = String.fromCharCode(letter.charCodeAt(0) + 1); // Increment letter
+		}
+		table.appendChild(tr);
+
+		let num = 1;
+		for (let row of this.cells) {
+			let tr = document.createElement("tr");
+
+			// Add number column
+			let th = document.createElement("th");
+			th.innerText = num;
+			tr.appendChild(th);
+			num++;
+
+			for (let cell of row) {
+				let td = document.createElement("td");
+				if (isCurrentPlayer && cell.hasShip) td.classList.add("ship");
+				if (cell.isHit && !cell.hasShip) td.classList.add("miss");
+				if (cell.isHit && cell.hasShip) td.classList.add("hit");
+				//if (!preventClicking) {
+					// Each cell has its own event listener that listens for clicks on itself
+					td.addEventListener('click', e => game.clickSpace(cell, isCurrentPlayer));
+				//}
 				tr.appendChild(td);
 			}
 			table.appendChild(tr);

@@ -57,6 +57,6 @@ class Executive {
 		document.getElementById("controls").style.display = "";
 		document.getElementById("both_boards").style.display = "";
 		document.getElementById("switch-turn").style.display = "none";
-		this.game = new GameplayAI(this.rows, this.cols, this.numShips, this.aiDifficulty); //Change to create new InitGame() function and call GameplayAI there
+		this.game = new GameplayAI(this.rows, this.cols, this.numShips, this.aiDifficulty); 
 	}
 }
