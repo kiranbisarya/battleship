@@ -64,16 +64,20 @@ class Board {
 			for (let cell of row) {
 				let td = document.createElement("td");
 				if (isCurrentPlayer && cell.hasShip) td.classList.add("ship");
-				if (cell.isHit && !cell.hasShip) td.classList.add("miss");
-				if (cell.isHit && cell.hasShip) td.classList.add("hit");
+				//if (cell.isHit && !cell.hasShip) td.classList.add("miss");
+				//if (cell.isHit && cell.hasShip) td.classList.add("hit");
 				if (!preventClicking) {
 					// Each cell has its own event listener that listens for clicks on itself
-					td.addEventListener('click', e => game.clickSpace(cell, isCurrentPlayer));
+					td.addEventListener('click', e => game.clickSpaceAI(cell, isCurrentPlayer));
 				}
 				tr.appendChild(td);
 			}
 			table.appendChild(tr);
 		}
+	}
+
+	getRandomInt(max) {
+		return Math.floor(Math.random() * Math.floor(max));
 	}
 
 
@@ -109,20 +113,33 @@ class Board {
 			th.innerText = num;
 			tr.appendChild(th);
 			num++;
+			//cell.row = getRandomInt(9);
+			//cell.col = getRandomInt(9);
 
 			for (let cell of row) {
 				let td = document.createElement("td");
 				if (isCurrentPlayer && cell.hasShip) td.classList.add("ship");
 				if (cell.isHit && !cell.hasShip) td.classList.add("miss");
 				if (cell.isHit && cell.hasShip) td.classList.add("hit");
+
+				
 				//if (!preventClicking) {
 					// Each cell has its own event listener that listens for clicks on itself
-					td.addEventListener('click', e => game.clickSpace(cell, isCurrentPlayer));
+				//td.addEventListener('click', e => game.clickSpace(cell, isCurrentPlayer));
+
+				//if (game.aiDiff == 1) { //randomly generates a cell to shoot for easy difficulty level
+	
+				//}
+				td.addEventListener('click', e => game.clickSpace(cell, isCurrentPlayer));
+				
+				//document.getElementById("ai-attack").addEventListener("click", e => game.clickSpace(cell, isCurrentPlayer));
 				//}
 				tr.appendChild(td);
 			}
 			table.appendChild(tr);
+			
 		}
+		
 	}
 	
 	// TODO: Validate coordinates are within bounds of board
