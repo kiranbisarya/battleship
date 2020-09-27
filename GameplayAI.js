@@ -165,8 +165,11 @@ class GameplayAI {
 
 	clickSpaceAI(cell, isCurrentPlayer) {
 		if (this.isSetup) {	
-			cell.row = Math.floor(Math.random() * Math.floor(9));
-			cell.col = Math.floor(Math.random() * Math.floor(9));
+			if (this.aiDiff == 1)
+			{
+				cell.row = Math.floor(Math.random() * Math.floor(9));
+				cell.col = Math.floor(Math.random() * Math.floor(9));
+			}
 			
 			if (!isCurrentPlayer && !cell.isHit) {
 				
