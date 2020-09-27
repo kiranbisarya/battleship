@@ -57,10 +57,10 @@ class GameplayAI {
 			else { // Switch to second player placing their ships
 				this.numShipsPlaced = 0;
 				this.turn = true;
-				document.getElementById("switch-turn").style.display = "none";
-				document.getElementById("dir-container").style.display = "";
-				this.renderBoards(false);
-				this.msg(this.playerName(this.turn) + " place your " + this.numShips + " ship");
+				 document.getElementById("switch-turn").style.display = "none";
+				 document.getElementById("dir-container").style.display = "";
+				 this.renderBoards(false);
+				 this.msg(this.playerName(this.turn) + " place your " + this.numShips + " ship");
 			}
 		});
 
@@ -102,7 +102,7 @@ class GameplayAI {
 	**/
 	renderBoards(preventClicking) {
 		this.board0.render(document.getElementById("board0"), this, !this.turn, preventClicking);
-		this.board1.render(document.getElementById("board1"), this, this.turn, preventClicking);
+		this.board1.renderAI(document.getElementById("board1"), this, this.turn);
 	}
 
 	/**
