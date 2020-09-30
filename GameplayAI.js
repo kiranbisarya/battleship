@@ -46,7 +46,7 @@ class GameplayAI {
 				document.getElementById("switch-turn").style.display = "none";
 				let modal = document.getElementById("modal");
 				modal.style.display = "block";
-				//Countdown timer
+				//Countdown timer shows up after both players have selected ship locations.
 				let time = 3;
 				document.getElementById("turn-switch-time").innerText = time;
 				this.turnTimer = setInterval(() => {
@@ -61,11 +61,7 @@ class GameplayAI {
 				 document.getElementById("switch-turn").style.display = "none";
 				 document.getElementById("dir-container").style.display = "";
 				 this.renderBoards(false);
-				 //if player 2, do not show this message
 				 this.msg(this.playerName(this.turn) + " place your " + this.numShips + " ship");
-
-				//  if(playerName == "Player " + 1) this.msg(this.playerName(this.turn) + " place your " + this.numShips + " ship");
-				//  if(playerName == "Player " + 2) this.msg(this.playerName(this.turn) + " will place their ships. ");
 			}
 		});
 
@@ -143,6 +139,8 @@ class GameplayAI {
 						//document.getElementById("ai-attack").style.display = "";
 					}
 				}
+
+				//LOCATION OF PLAYER 1 BUG: Player 1 will have unlimited number of guesses on Player 2's board unless fixed.
 				else {
 					this.renderBoards(true);
 					//since the below line I just commented out, the game will get stuck here until we add ai-attack code to the event listener above
@@ -160,11 +158,9 @@ class GameplayAI {
 
 	clickSpaceAI(cell, isCurrentPlayer) {
 		if (this.isSetup) {	
-			if (this.aiDiff == 1 || 2 || 3) //Ship placement for AI will be random at every level
-			{
-				cell.row = Math.floor(Math.random() * Math.floor(9));
-				cell.col = Math.floor(Math.random() * Math.floor(9));
-			}
+			//Ship placement for AI will be random at every level
+		cell.row = Math.floor(Math.random() * Math.floor(9));
+		cell.col = Math.floor(Math.random() * Math.floor(9));
 			
 			if (!isCurrentPlayer && !cell.isHit) {
 				
