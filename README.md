@@ -2,8 +2,8 @@
 A player-versus-player hotseat Battleship game written in [Vanilla JS](http://vanilla-js.com/).
 
 ## Links
-- [Click here to play](https://github.com/kiranbisarya/battleship/index.html)
-- [View the documentation](https://github.com/kiranbisarya/battleship/documentation/index.html)
+- [Click here to play](https://kiranbisarya.github.io/battleship/index.html) 
+- [View the documentation](https://kiranbisarya.github.io/battleship/documentation/index.html)
 
 ## Works cited
 - All the code in this project was written from scratch without any JavaScript libraries or frameworks.
