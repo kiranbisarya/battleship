@@ -148,6 +148,8 @@ class GameplayAI {
 					//document.getElementById("ai-attack").style.display = "";
 					//display "Miss" message when guess does not result in a ship hit.
 					this.msg("Miss.");
+					var snd = new Audio("miss.mp3");
+					snd.play();
 				}
 			}
 		}
@@ -190,6 +192,8 @@ class GameplayAI {
 					//document.getElementById("ai-attack").style.display = "";
 					//display "Miss" message when guess does not result in a ship hit.
 					this.msg("Miss.");
+					var snd = new Audio("miss.mp3");
+					snd.play();
 				}
 			}
 		}

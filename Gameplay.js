@@ -135,6 +135,8 @@ class Gameplay {
 					this.renderBoards(true);
 					document.getElementById("switch-turn").style.display = "";
 					this.msg("Miss.")
+					var snd = new Audio("miss.mp3");
+					snd.play();
 				}
 			}
 		}
