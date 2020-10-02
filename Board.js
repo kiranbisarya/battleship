@@ -64,20 +64,16 @@ class Board {
 			for (let cell of row) {
 				let td = document.createElement("td");
 				if (isCurrentPlayer && cell.hasShip) td.classList.add("ship");
-				//if (cell.isHit && !cell.hasShip) td.classList.add("miss");
-				//if (cell.isHit && cell.hasShip) td.classList.add("hit");
+				if (cell.isHit && !cell.hasShip) td.classList.add("miss");
+				if (cell.isHit && cell.hasShip) td.classList.add("hit");
 				if (!preventClicking) {
-					// Each cell has its own event listener that listens for clicks on itself
-					td.addEventListener('click', e => game.clickSpaceAI(cell, isCurrentPlayer));
+					// Each cell has its own event listenser that listens for clicks on itself
+					td.addEventListener('click', e => game.clickSpace(cell, isCurrentPlayer));
 				}
 				tr.appendChild(td);
 			}
 			table.appendChild(tr);
 		}
-	}
-
-	getRandomInt(max) {
-		return Math.floor(Math.random() * Math.floor(max));
 	}
 
 
@@ -88,7 +84,7 @@ class Board {
 	* @param {boolean} isCurrentPlayer for whether all ship locations should be visible
 	* @param {boolean} preventClicking to restrict a player to click again
 	**/
-	renderAI(table, game, isCurrentPlayer) {
+	renderAI(table, game, isCurrentPlayer, preventClicking) {
 		table.innerHTML = ""; // Remove any existing cells
 
 		// Add letter row
@@ -121,9 +117,7 @@ class Board {
 				if (isCurrentPlayer && cell.hasShip) td.classList.add("ship");
 				if (cell.isHit && !cell.hasShip) td.classList.add("miss");
 				if (cell.isHit && cell.hasShip) td.classList.add("hit");
-
-				
-				//if (!preventClicking) {
+				if (!preventClicking) {
 					// Each cell has its own event listener that listens for clicks on itself
 				//td.addEventListener('click', e => game.clickSpace(cell, isCurrentPlayer));
 
@@ -133,7 +127,7 @@ class Board {
 				td.addEventListener('click', e => game.clickSpace(cell, isCurrentPlayer));
 				
 				//document.getElementById("ai-attack").addEventListener("click", e => game.clickSpace(cell, isCurrentPlayer));
-				//}
+				}
 				tr.appendChild(td);
 			}
 			table.appendChild(tr);

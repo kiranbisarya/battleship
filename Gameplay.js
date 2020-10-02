@@ -45,7 +45,7 @@ class Gameplay {
 				document.getElementById("switch-turn").style.display = "none";
 				let modal = document.getElementById("modal");
 				modal.style.display = "block";
-				let time = 5;
+				let time = 3;
 				document.getElementById("turn-switch-time").innerText = time;
 				this.turnTimer = setInterval(() => {
 					time--;

@@ -100,7 +100,7 @@ class GameplayAI {
 	**/
 	renderBoards(preventClicking) {
 		this.board0.render(document.getElementById("board0"), this, !this.turn, preventClicking);
-		this.board1.renderAI(document.getElementById("board1"), this, this.turn);
+		this.board1.renderAI(document.getElementById("board1"), this, this.turn, preventClicking);
 	}
 
 	/**
@@ -140,11 +140,13 @@ class GameplayAI {
 					}
 				}
 
-				//LOCATION OF PLAYER 1 BUG: Player 1 will have unlimited number of guesses on Player 2's board unless fixed.
+				//LOCATION OF PLAYER 1 BUG: Player 1 will have unlimited number of guesses on Player 2's board unless fixed;
 				else {
 					this.renderBoards(true);
 					//since the below line I just commented out, the game will get stuck here until we add ai-attack code to the event listener above
 					document.getElementById("switch-turn").style.display = "";
+					// document.getElementById("switch-turn").style.display = "none";
+					// this.turn = true;
 					//document.getElementById("ai-attack").style.display = "";
 					//display "Miss" message when guess does not result in a ship hit.
 					this.msg("Miss.");
@@ -159,11 +161,18 @@ class GameplayAI {
 	clickSpaceAI(cell, isCurrentPlayer) {
 		if (this.isSetup) {	
 			//Ship placement for AI will be random at every level
+			//Level 1 = random attack
+			//Level 2 = attacks orthongonally
+			//Level 3 = knows where all player 1's ships are
+
+			//let attackRow = Math.floor(Math.random() * Math.floor(9));
+			//let attackCol = Math.floor(Math.random() * Math.floor(9));
+			
+			//when moved, both game boards dissapear
 		cell.row = Math.floor(Math.random() * Math.floor(9));
 		cell.col = Math.floor(Math.random() * Math.floor(9));
 			
 			if (!isCurrentPlayer && !cell.isHit) {
-				
 				cell.isHit = true;
 				if (cell.hasShip) {
 					let board = this.turn ? this.board0 : this.board1;
@@ -177,7 +186,7 @@ class GameplayAI {
 					if (board.checkWin()){
 						this.gameEnd();
 					} 
-					else {
+					else { 
 						this.renderBoards(true);
 						document.getElementById("switch-turn").style.display = "";
 						//document.getElementById("ai-attack").style.display = "";
